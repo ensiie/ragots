@@ -1,3 +1,4 @@
 # Contributors
-- Paul Chobert
 - Victor Bahl
+- Paul Chobert <paul@chobert.fr>
+- Léo Unbekandt <leo@unbekandt.eu>
