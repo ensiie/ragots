@@ -7,3 +7,4 @@
 - Paul-Henri Koeck
 - Baptiste Lafabregue
 - Léo Unbekandt <leo@unbekandt.eu>
+- Julien Ernwein
