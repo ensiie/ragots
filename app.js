@@ -5,7 +5,7 @@ var async = require('async');
 var app = express();
 app.use(express.bodyParser());
 
-var redisClient = redis.createClient();
+var redisClient = redis.createClient(process.env.REDISTOGO_URL || 'redis://localhost');
 
 var logger = function(req, res, next) {console.log(req.body); next();};
 
