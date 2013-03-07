@@ -1,0 +1,30 @@
+{
+  "name": "ragots",
+  "version": "0.0.0",
+  "description": "- Paul Chobert",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.1.0",
+    "async": "~0.2.6",
+    "jade": "~0.28.2",
+    "redis": "~0.8.2",
+    "underscore": "~1.4.4",
+    "supervisor": "~0.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/barodeur/ragots.git"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "author": "",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "19d0eef57c6657ae658fcabfb020db5c3c6de1d8"
+}
