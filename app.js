@@ -4,6 +4,7 @@ var async = require('async');
 
 var app = express();
 app.use(express.bodyParser());
+app.use(require('connect-assets')());
 
 
 var redisClient;
