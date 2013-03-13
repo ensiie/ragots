@@ -6,7 +6,7 @@ html(lang="fr")
     != css('styles')
   body
     form#new-ragot(action="/ragots", method="POST")
-      textarea(type="text", name="message", placeholder="Il parait que...", autocomplete="off", autofocus)
+      textarea(type="text", name="message", placeholder="Il parait que...", autocomplete="off", autofocus, required)
       input(type="submit", value="Ragoter")
     ul#ragots
       each ragot in ragots
