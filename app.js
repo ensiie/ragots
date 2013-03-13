@@ -22,7 +22,7 @@ var auth = express.basicAuth(function(user, pass) {
 });
 
 app.use(logger);
-app.use(auth);
+if(process.env.PASSWORD) app.use(auth);
 
 app.get('/', function(req, res) {
   redisClient.lrange('ragots', 0, -1, function(err, ragotIds) {
