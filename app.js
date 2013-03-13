@@ -36,6 +36,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/ragots', function(req, res) {
+  if(!req.body.message.replace(/\s/g,"")) return res.redirect('/');
   redisClient.incr('ragots:count', function(err, i) {
     async.parallel([
       function(cb) { redisClient.set('ragots:'+i, req.body.message, cb); },
@@ -44,6 +45,7 @@ app.post('/ragots', function(req, res) {
       if(!err) res.redirect('/');
     });
   });
+  return null;
 });
 
 app.listen(process.env.PORT || 3000);
