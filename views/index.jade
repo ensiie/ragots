@@ -2,10 +2,12 @@ doctype 5
 html(lang="fr")
   head
     title Ragots
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+    != css('styles')
   body
-    form(action="/ragots", method="POST")
-      input(type="text", name="message", autofocus)
-      input(type="submit")
+    form#new-ragot(action="/ragots", method="POST")
+      textarea(type="text", name="message", placeholder="Il parait que...", autocomplete="off", autofocus)
+      input(type="submit", value="Ragoter")
     ul#ragots
       each ragot in ragots
         li.ragot= ragot
