@@ -32,7 +32,7 @@ Attention, sous OSX, le serveur ne se lance pas automatiquement, il faut le lanc
 ## developer !
 Il vous faudrat installer les dépendances de l'application. Cela ce fait automatiquement avec npm.
 
-   npm install
+    npm install
 
 Cette commande récupère la liste des dépendance dans le fichier package.json et les installe dans le sous-dossier node_modules.
 
