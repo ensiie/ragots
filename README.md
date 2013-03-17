@@ -30,6 +30,12 @@ Pour les utilisateurs d'OSX
 Attention, sous OSX, le serveur ne se lance pas automatiquement, il faut le lancer manuellement avec la commande `redis-server`.
 
 ## developer !
+Il vous faudrat installer les dépendances de l'application. Cela ce fait automatiquement avec npm.
+
+    npm install
+
+Cette commande récupère la liste des dépendance dans le fichier package.json et les installe dans le sous-dossier node_modules.
+
 Je vous conseille aussi d'installer le paquet `supervisor` de NPM. Celui-ci redémarrera votre application à chaque modification d'un fichier.
 
     npm install -g supervisor
