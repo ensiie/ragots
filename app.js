@@ -36,13 +36,15 @@ app.get('/', function(req, res) {
 });
 
 app.post('/ragots', function(req, res) {
-  if(!req.body.message.replace(/\s/g,"")) return res.redirect('/');
+  if(!req.body.message.replace(/\s/g,"")) return res.json(422, { "error" : "empty" });
   redisClient.incr('ragots:count', function(err, i) {
     async.parallel([
       function(cb) { redisClient.set('ragots:'+i, req.body.message, cb); },
       function(cb) { redisClient.lpush('ragots', i, cb); }
     ], function(err) {
-      if(!err) res.redirect('/');
+      if(!err) {
+        res.json(201, { "ragot" : { "message" : req.body.message} });
+      }
     });
   });
   return null;
