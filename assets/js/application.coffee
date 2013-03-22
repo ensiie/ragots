@@ -21,7 +21,7 @@ $ ->
             $("#new-ragot textarea").removeClass "input-error"
             submit_button.html "Ragoter"
           $("#new-ragot textarea").val ""
-          $("#ragots").prepend "<li class=\"new-ragot-item\" >" + response.ragot.message + "</li>"
+          add_new_ragot response.ragot
       error : (xhr, errorType, error) ->
         if xhr.status == 422
           res = JSON.parse xhr.response
@@ -34,3 +34,11 @@ $ ->
 
     event.preventDefault()
     false
+
+add_new_ragot = (ragot) ->
+  item = $("<li class=\"ragot\">" + ragot.message + "</li>")
+  item.css "height", "0"
+  $("#ragots").prepend item
+  item.animate
+    height: "1.5em"
+    500, 'ease-out'
