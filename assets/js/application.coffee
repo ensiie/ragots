@@ -1,3 +1,6 @@
+#= require zepto
+#= require_self
+
 $ ->
   $("#new-ragot textarea").on "keypress" , (event) ->
     if event.shiftKey && event.which == 13
