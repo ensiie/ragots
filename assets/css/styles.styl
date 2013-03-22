@@ -4,6 +4,8 @@ reset-html5()
 
 backgroundColor = #DFAD51
 bodyBackgroundColor = white
+waitColor = #DDDDDD
+errorColor = #B82A2A
 defaultFont = 'Lato', sans-serif
 
 html
@@ -31,15 +33,22 @@ form#new-ragot
     width 100%
     border 0
     margin 0
+    margin-bottom 10px
+    padding 10px 10px 10px 10px
     font-family inherit
     font-size 1.8em
     font-weight 300
+
+    &.input-error
+      border 1px solid errorColor
+      box-shadow: 1px 1px 12px #955;
+
     &:focus
       outline none
-  input[type="submit"]
+
+  [type="submit"]
     -webkit-appearance none
     border-radius 0
-    display block
     background backgroundColor
     border 0px
     width 100%
@@ -48,6 +57,10 @@ form#new-ragot
     font-family inherit
     font-size 1.3em
     font-weight inherit
+    text-align center
+
+    &.onrequest
+      background waitColor
 
 ul#ragots
   list-style none
