@@ -26,9 +26,6 @@ body
 form#new-ragot
   clearfix()
   padding 0.7em 1.2em
-  [name="message"].input-error
-    border 1px solid errorColor
-    box-shadow: 1px 1px 12px #955;
   [name="message"]
     display block
     box-sizing border-box
@@ -41,11 +38,15 @@ form#new-ragot
     font-family inherit
     font-size 1.8em
     font-weight 300
+
+    &.input-error
+      border 1px solid errorColor
+      box-shadow: 1px 1px 12px #955;
+
     &:focus
       outline none
-  #submit-ragot.onrequest
-    background waitColor
-  #submit-ragot
+
+  [type="submit"]
     -webkit-appearance none
     border-radius 0
     background backgroundColor
@@ -57,6 +58,9 @@ form#new-ragot
     font-size 1.3em
     font-weight inherit
     text-align center
+
+    &.onrequest
+      background waitColor
 
 ul#ragots
   list-style none
