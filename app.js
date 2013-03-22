@@ -36,14 +36,26 @@ app.get('/', function(req, res) {
 });
 
 app.post('/ragots', function(req, res) {
-  if(!req.body.message.replace(/\s/g,"")) return res.json(422, { "error" : "empty" });
+  if(!req.body.message.replace(/\s/g,"")) {
+    if(req.accepts("json")) {
+      return res.json(422, { "error" : "empty" });
+    } else {
+      res.status(422);
+      res.redirect("/");
+    }
+  }
   redisClient.incr('ragots:count', function(err, i) {
     async.parallel([
       function(cb) { redisClient.set('ragots:'+i, req.body.message, cb); },
       function(cb) { redisClient.lpush('ragots', i, cb); }
     ], function(err) {
       if(!err) {
-        res.json(201, { "ragot" : { "message" : req.body.message} });
+        if(req.accepts("json")) {
+          res.json(201, { "ragot" : { "message" : req.body.message} });
+        } else {
+          res.status(201);
+          res.redirect("/");
+        }
       }
     });
   });
