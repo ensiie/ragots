@@ -8,6 +8,7 @@ var http = require('http')
 var server = http.createServer(app)
 var io = require('socket.io').listen(server);
 
+var websocket = require('./lib/websocket.js')(io);
 var Ragot = require('./lib/models/ragot.js');
 
 var logger = function(req, res, next) {console.log(req.body); next();};
