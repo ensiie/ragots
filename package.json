@@ -12,6 +12,7 @@
     "stylus": "~0.32.1",
     "nib": "~0.9.1",
     "coffee-script": "~1.6.2",
+    "socket.io": "~0.9.13"
   },
   "devDependencies": {},
   "scripts": {

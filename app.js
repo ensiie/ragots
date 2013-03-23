@@ -6,6 +6,9 @@ var app = express();
 app.use(express.bodyParser());
 app.use(require('connect-assets')());
 
+var http = require('http')
+var server = http.createServer(app)
+var io = require('socket.io').listen(server);
 
 var redisClient;
 if(process.env.REDISTOGO_URL) {
@@ -62,4 +65,4 @@ app.post('/ragots', function(req, res) {
   return null;
 });
 
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);
