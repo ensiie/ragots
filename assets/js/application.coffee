@@ -2,6 +2,13 @@
 #= require_self
 
 $ ->
+  socket = io.connect "http://localhost:3000"
+  socket.on 'ragot', (ragot) ->
+    add_new_ragot ragot
+  socket.on 'error', (err) ->
+    $("#new-ragot textarea").addClass "input-error"
+    $('#new-ragot button[type="submit"]').html "Ragoter (Erreur : "+err.name+")"
+    
   $("#new-ragot textarea").on "keypress" , (event) ->
     if event.shiftKey && event.which == 13
       $("#new-ragot").submit()
@@ -9,33 +16,17 @@ $ ->
 
   $("#new-ragot").on "submit", (event) ->
     submit_button = $('#new-ragot button[type="submit"]')
-    $.ajax
-      type : "POST"
-      url : "/ragots"
-      data : $("#new-ragot").serialize()
-      beforeSend : (xhr, settings) ->
-        submit_button.addClass "onrequest"
-      success : (response, state, xhr) ->
-        if xhr.status == 201
-          if $("#new-ragot textarea").hasClass "input-error"
-            $("#new-ragot textarea").removeClass "input-error"
-            submit_button.html "Ragoter"
-          $("#new-ragot textarea").val ""
-          add_new_ragot response.ragot
-      error : (xhr, errorType, error) ->
-        if xhr.status == 422
-          res = JSON.parse xhr.response
-          $("#new-ragot textarea").addClass "input-error"
-          submit_button.html "Ragoter (Erreur "+xhr.status+" : "+res.error+")"
-        else if xhr.status == 500
-          submit_button.html "Ragoter (Erreur serveur)"
-      complete : (xhr, status) ->
-        submit_button.removeClass "onrequest"
-
+    submit_button.addClass "onrequest"
+    socket.emit("ragot", { "message" : $('#new-ragot [name=message]').val() })
+    submit_button.removeClass "onrequest"
     event.preventDefault()
-    false
 
 add_new_ragot = (ragot) ->
+  submit_button = $('#new-ragot button[type="submit"]')
+  if $("#new-ragot textarea").hasClass "input-error"
+    $("#new-ragot textarea").removeClass "input-error"
+    submit_button.html "Ragoter"
+  $("#new-ragot textarea").val ""
   item = $("<li class=\"ragot\">" + ragot.message + "</li>")
   item.css "height", "0"
   $("#ragots").prepend item
