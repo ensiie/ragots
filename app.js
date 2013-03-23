@@ -1,5 +1,4 @@
 var express = require('express');
-var redis = require('redis');
 var async = require('async');
 
 var app = express();
@@ -10,14 +9,6 @@ var http = require('http')
 var server = http.createServer(app)
 var io = require('socket.io').listen(server);
 
-var redisClient;
-if(process.env.REDISTOGO_URL) {
-  var rtg = require('url').parse(process.env.REDISTOGO_URL);
-  redisClient = redis.createClient(rtg.port, rtg.hostname);
-  redisClient.auth(rtg.auth.split(":")[1]);
-} else {
-  redisClient = redis.createClient();
-}
 
 var logger = function(req, res, next) {console.log(req.body); next();};
 
