@@ -1,6 +1,6 @@
 {
   "name": "ragots",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "- Paul Chobert",
   "main": "app.js",
   "dependencies": {
@@ -10,7 +10,9 @@
     "redis": "~0.8.2",
     "connect-assets": "~2.4.0",
     "stylus": "~0.32.1",
-    "nib": "~0.9.1"
+    "nib": "~0.9.1",
+    "coffee-script": "~1.6.2",
+    "socket.io": "~0.9.13"
   },
   "devDependencies": {},
   "scripts": {
