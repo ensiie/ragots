@@ -2,7 +2,7 @@
 #= require_self
 
 $ ->
-  socket = io.connect "http://localhost:3000"
+  socket = io.connect document.URL
   socket.on 'ragot', (ragot) ->
     add_new_ragot ragot
   socket.on 'error', (err) ->
