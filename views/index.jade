@@ -3,11 +3,14 @@ html(lang="fr")
   head
     title Ragots
     meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+    script(type="text/javascript", src="/socket.io/socket.io.js")
     != css('styles')
+    != js('application')
   body
     form#new-ragot(action="/ragots", method="POST")
       textarea(type="text", name="message", placeholder="Il parait que...", autocomplete="off", autofocus, required)
-      input(type="submit", value="Ragoter")
+      button(type="submit")
+        = "Ragoter"
     ul#ragots
       each ragot in ragots
         li.ragot= ragot
