@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 
 app.post('/ragots', function(req, res) {
   var ragot = new Ragot(req.body.ragot);
-
+  
   ragot.create(function(err) {
     if(err) {
       res.status(422);
