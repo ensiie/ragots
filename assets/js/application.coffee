@@ -5,9 +5,6 @@ $ ->
   socket = io.connect document.URL
   socket.on 'ragot', (ragot) ->
     add_new_ragot ragot
-  socket.on 'error', (err) ->
-    $("#new-ragot textarea").addClass "input-error"
-    $('#new-ragot button[type="submit"]').html "Ragoter (Erreur : "+err.name+")"
     
   $("#new-ragot textarea").on "keypress" , (event) ->
     if event.shiftKey && event.which == 13
@@ -16,9 +13,22 @@ $ ->
 
   $("#new-ragot").on "submit", (event) ->
     submit_button = $('#new-ragot button[type="submit"]')
-    submit_button.addClass "onrequest"
-    socket.emit("ragot", { "message" : $('#new-ragot [name=message]').val() })
-    submit_button.removeClass "onrequest"
+    $.ajax
+      url: '/ragots'
+      type: "POST"
+      data:
+        ragot:
+          message: $('#new-ragot [name=message]').val()
+      beforeSend: (xhr, settings) ->
+        submit_button.addClass "onrequest"
+      success: (data, status, xhr) ->
+        $("#new-ragot textarea").val ""
+      error: (xhr, errorType, status) ->
+        $("#new-ragot textarea").addClass "input-error"
+        $('#new-ragot button[type="submit"]').html "Ragoter (Erreur : "+xhr.status+")"
+      complete: (xhr, status) ->
+        submit_button.removeClass "onrequest"
+
     event.preventDefault()
 
 add_new_ragot = (ragot) ->
@@ -26,7 +36,6 @@ add_new_ragot = (ragot) ->
   if $("#new-ragot textarea").hasClass "input-error"
     $("#new-ragot textarea").removeClass "input-error"
     submit_button.html "Ragoter"
-  $("#new-ragot textarea").val ""
   item = $("<li class=\"ragot\">" + ragot.message + "</li>")
   item.css "height", "0"
   $("#ragots").prepend item
