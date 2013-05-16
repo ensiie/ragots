@@ -1,9 +1,16 @@
 Ragot = require "./models/ragot.js"
 
 class Websocket
-  constructor: (@io, withPubsub) ->
+  constructor: (@io, withLongPolling, withPubsub) ->
+    if withLongPolling
+      @initLongPolling
     if withPubsub
       @initPubSub
+
+  initLongPolling : ->
+    @io.configure ->
+      @io.set "transports", ["xhr-polling"]
+      @io.set "polling duration", 10
 
   initPubSub : ->
     RedisStore = require 'socket.io/lib/stores/redis'
@@ -22,7 +29,7 @@ class Websocket
     @io.sockets.emit 'ragot', ragot.data
 
 
-# We don't use pubsub for the moment
+# We don't use pubsub for the moment but long polling as Heroku doesn't support websocket
 module.exports = (io) ->
-  new Websocket(io, false)
+  new Websocket(io, true, false)
 
