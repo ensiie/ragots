@@ -18,7 +18,7 @@ $ ->
       type: "POST"
       data:
         ragot:
-          message: $('#new-ragot [name=message]').val()
+          message: $('#new-ragot [name="ragot[message]"]').val()
       beforeSend: (xhr, settings) ->
         submit_button.addClass "onrequest"
       success: (data, status, xhr) ->
@@ -28,7 +28,6 @@ $ ->
         $('#new-ragot button[type="submit"]').html "Ragoter (Erreur : "+xhr.status+")"
       complete: (xhr, status) ->
         submit_button.removeClass "onrequest"
-
     event.preventDefault()
 
 add_new_ragot = (ragot) ->
