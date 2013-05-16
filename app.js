@@ -1,3 +1,4 @@
+require('coffee-script');
 var express = require('express');
 
 var app = express();
@@ -8,7 +9,7 @@ var http = require('http')
 var server = http.createServer(app)
 var io = require('socket.io').listen(server);
 
-var websocket = require('./lib/websocket.js')(io);
+var websocket = require('./lib/websocket')(io);
 var Ragot = require('./lib/models/ragot.js');
 
 var logger = function(req, res, next) {console.log(req.body); next();};
@@ -27,16 +28,16 @@ app.get('/', function(req, res) {
 });
 
 app.post('/ragots', function(req, res) {
-  var ragot = new Ragot(req.body);
+  var ragot = new Ragot(req.body.ragot);
 
   ragot.create(function(err) {
-    console.log(err);
     if(err) {
       res.status(422);
-      res.redirect("/");
+    } else {
+      websocket.broadcastRagot(ragot);
+      res.status(201);
     }
-    res.status(201);
-    res.redirect("/");
+    res.end();
   });
 
   return null;
