@@ -26,7 +26,7 @@ class Websocket
     })
 
   broadcastRagot : (ragot) ->
-    @io.sockets.emit 'ragot', ragot.data
+    @io.sockets.emit 'ragot', ragot
 
 
 # We don't use pubsub for the moment but long polling as Heroku doesn't support websocket

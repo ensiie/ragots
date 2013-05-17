@@ -10,7 +10,7 @@ var server = http.createServer(app)
 var io = require('socket.io').listen(server);
 
 var websocket = require('./lib/websocket')(io);
-var Ragot = require('./lib/models/ragot.js');
+var Ragot = require('./lib/models/ragot');
 
 var logger = function(req, res, next) {console.log(req.body); next();};
 
@@ -28,9 +28,13 @@ app.get('/', function(req, res) {
 });
 
 app.post('/ragots', function(req, res) {
-  var ragot = new Ragot(req.body.ragot);
+  if(!req.body.ragot.message) {
+    res.status(403);
+    res.end();
+  }
+  var ragot = new Ragot(req.body.ragot.message);
   
-  ragot.create(function(err) {
+  ragot.save(function(err) {
     if(err) {
       res.status(422);
     } else {
