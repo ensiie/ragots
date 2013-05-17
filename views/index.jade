@@ -15,3 +15,6 @@ html(lang="fr")
       each ragot in ragots
         li.ragot
           = ragot.message
+          - if(ragot.date != -1)
+            span.date
+              = toReadableDate(new Date(ragot.date))
