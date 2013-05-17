@@ -28,7 +28,11 @@ app.get('/', function(req, res) {
 });
 
 app.post('/ragots', function(req, res) {
-  var ragot = new Ragot(req.body.ragot);
+  if(!req.body.ragot.message) {
+    res.status(403);
+    res.end();
+  }
+  var ragot = new Ragot(req.body.ragot.message);
   
   ragot.create(function(err) {
     if(err) {
