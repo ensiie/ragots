@@ -10,7 +10,7 @@ var server = http.createServer(app)
 var io = require('socket.io').listen(server);
 
 var websocket = require('./lib/websocket')(io);
-var Ragot = require('./lib/models/ragot.js');
+var Ragot = require('./lib/models/ragot');
 
 var logger = function(req, res, next) {console.log(req.body); next();};
 
