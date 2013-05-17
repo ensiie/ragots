@@ -34,7 +34,7 @@ app.post('/ragots', function(req, res) {
   }
   var ragot = new Ragot(req.body.ragot.message);
   
-  ragot.create(function(err) {
+  ragot.save(function(err) {
     if(err) {
       res.status(422);
     } else {
