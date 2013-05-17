@@ -1,5 +1,6 @@
 #= require zepto
 #= require_self
+#= require_tree ./helpers
 
 $ ->
   socket = io.connect document.URL
@@ -35,7 +36,7 @@ add_new_ragot = (ragot) ->
   if $("#new-ragot textarea").hasClass "input-error"
     $("#new-ragot textarea").removeClass "input-error"
     submit_button.html "Ragoter"
-  item = $("<li class=\"ragot\">" + ragot.message + "</li>")
+  item = $("<li class=\"ragot\">" + ragot.message + '<span class="date">' + toReadableDate(new Date(ragot.date)) + "</span></li>")
   item.css "height", "0"
   $("#ragots").prepend item
   item.animate
