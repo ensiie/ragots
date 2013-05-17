@@ -7,4 +7,4 @@ toReadableDate = function(date) {
 
   return day + "/" + month + "/" + date.getFullYear() 
     + " " + hours + ":" + minutes + ":" + seconds
-}
+};
