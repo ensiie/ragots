@@ -14,7 +14,8 @@ html(lang="fr")
     ul#ragots
       each ragot in ragots
         li.ragot
-          = ragot.message
           - if(ragot.date != -1)
-            span.date
+            .date
               = toReadableDate(new Date(ragot.date))
+          .message
+            = ragot.message
