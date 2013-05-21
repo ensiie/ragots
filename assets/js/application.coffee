@@ -40,5 +40,5 @@ add_new_ragot = (ragot) ->
   item.css "height", "0"
   $("#ragots").prepend item
   item.animate
-    height: "1.5em"
+    height: "68px"
     500, 'ease-out'
